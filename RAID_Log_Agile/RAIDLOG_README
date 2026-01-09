@@ -1,0 +1,20 @@
+## RAID Log (Risks, Assumptions, Issues, Dependencies)
+
+This folder contains a **RAID Log** used to proactively manage delivery risks and dependencies throughout the project lifecycle.
+
+### Purpose
+- Track risks and issues impacting delivery
+- Document assumptions and validate them during execution
+- Monitor cross-team dependencies
+- Improve transparency and accountability
+
+### Key Elements Captured
+- Risk / Issue / Dependency description
+- Impact level
+- Ownership
+- Current status and resolution notes
+
+### Tools Used
+- Microsoft Excel
+
+This RAID log demonstrates structured risk management practices commonly used in PMO and Agile delivery teams.
