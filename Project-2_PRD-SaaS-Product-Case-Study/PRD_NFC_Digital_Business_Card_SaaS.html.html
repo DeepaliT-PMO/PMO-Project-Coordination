@@ -1,0 +1,719 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Product Requirements Document [PRD]</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2cad72c8-8986-811d-8a74-df92723e4b41" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⚓</span></div><h1 class="page-title" dir="auto">Product Requirements Document [PRD]</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><table id="2cad72c8-8986-81ce-b4f2-c72a473fd68e" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81f5-a0ef-ddbd4f1d46ee"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Title/Initiative</th><td id="`LbZ" class="" style="width:634px"><strong>Wavpe </strong>– NFC Business Card &amp; Digital Profile Platform</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81c2-a1a9-fba385d21ec7"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Date &amp; Version</th><td id="`LbZ" class="" style="width:634px">Version 1.0 | June 2022</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81e3-b2ea-f693cbd66696"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Product - Point of Contact (POC)</th><td id="`LbZ" class="" style="width:634px">Product Manager – Wavpe Platform</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-8199-828b-fadfd7103f87"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Design POC</th><td id="`LbZ" class="" style="width:634px">UX/UI Design Team – Mobile &amp; Web</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-8147-9d7c-cb3c5da2e6f3"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Tech POC</th><td id="`LbZ" class="" style="width:634px">Engineering Lead – NFC Integration &amp; App Platform</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-8152-beca-db9f7af2f0a7"><th id="=Og{" class="simple-table-header-color simple-table-header" style="width:180px">Marketing POC</th><td id="`LbZ" class="" style="width:634px">Marketing Manager – Brand &amp; Go-To-Market</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-81ba-99c7-eb826beb481b" class="block-color-yellow_background">Discovery Inputs</h2></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8075-80f1-e34ee3dffbac" class="bulleted-list"><li style="list-style-type:disc">The problem space was informed through a combination of qualitative insights and market observation. Inputs included informal discussions with professionals and early adopters, observation of existing networking behaviors, and internal stakeholder conversations around scalability, sustainability, and user experience.</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8028-9568-d2e28d740ddb" class="bulleted-list"><li style="list-style-type:disc">These insights highlighted limitations of traditional paper business cards, the need for instant contact sharing, and the importance of maintaining an up-to-date digital professional identity.</li></ul></div><div style="display:contents" dir="auto"><h2 id="2cbd72c8-8986-8012-a60d-dce8c62f0996" class="block-color-yellow_background">Product Background</h2></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80a0-b175-da9d092bf4fd" class="">Wavpe is an NFC-enabled digital business card solution designed to modernize professional networking. The product combines a physical NFC business card with a mobile and web application that allows users to create, manage, and share their professional identity digitally.</p></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-8071-baee-e9a6025b2d83" class="">By enabling instant contact sharing through NFC tap or QR code, Wavpe eliminates the limitations of traditional paper business cards while allowing real-time profile updates and a consistent digital presence across devices.</p></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-8084-926e-fe722d1e503d" class="block-color-yellow_background">Why? (Objective)</h2></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-8171-a7d6-fa7aa8422949" class=""><strong>For business.</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80bb-a09e-d7cd8f5a34ad" class="">Wavpe aims to replace traditional paper business cards with a scalable, digital solution that strengthens brand positioning and enables long-term product growth. The platform supports recurring engagement through editable profiles, reduces dependency on physical materials, and opens opportunities for future enterprise adoption and premium feature monetization.</p></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-8193-a636-f79ac47cad8c" class=""><strong>For users.</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80b7-ba06-f07009615066" class="">Wavpe provides professionals with a faster, smarter, and more reliable way to share contact information. Users can maintain an up-to-date professional identity, avoid reprinting cards, and present a modern digital impression during business interactions.</p></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-81a9-831b-e861e4bae6bd" class="block-color-yellow_background">How do we measure success?</h2></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-817d-971d-f802fc839c7a" class=""><strong>Associated Objective and Key Results (OKRs)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-80fa-b103-c0dee2c06670" class="bulleted-list"><li style="list-style-type:disc">The primary objective is to enable seamless, reliable, and high-quality digital contact sharing using NFC technology.</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-802e-b028-cc00c60e0afc" class="bulleted-list"><li style="list-style-type:disc">Key results include achieving a high NFC card activation success rate, ensuring reliable profile access through NFC and QR, and reducing reliance on traditional paper business cards for active users.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-815f-9bd4-f2802a5d104c" class=""><strong>Success Metrics</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80b7-8f8b-e54b257791a1" class="">Success will be measured through NFC card activation success rate, profile update success rate, profile page load performance, number of successful NFC and QR profile views, and overall user adoption following card activation.</p></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81dd-9f06-c8fbc3ddc0bd" class=""><strong>Guardrail/Do not disturb metrics (These metrics shouldn’t be negatively affected)</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-807f-b8ae-db62d5f15cff" class="">The implementation should not negatively impact application stability, performance, or security. App crash rates must remain within acceptable thresholds, profile load times should not degrade, NFC tap failures must remain minimal, and user data privacy and security standards must be preserved.</p></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-8151-8838-e499f9f7191c" class="block-color-yellow_background">Who are the users:</h2></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81dd-9d4e-e30bce7dabf2" class=""><strong>User Persona</strong></h3></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-805e-8cae-da2a878d0cb2" class="bulleted-list"><li style="list-style-type:disc">The primary user persona is a working professional who frequently attends meetings, conferences, and networking events and requires quick, reliable contact sharing. This user values professionalism, convenience, and consistency.</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-8054-a304-e489af255b64" class="bulleted-list"><li style="list-style-type:disc">The secondary persona is a sales executive who shares contact information frequently and needs the flexibility to update details, add social links, and ensure reliable access during high-volume interactions.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81e8-b86b-fed55003947d" class=""><strong>User Problems and Needs</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80ea-868a-c9f97ec2a49a" class=""><strong>Needs</strong><br/>Users need a fast and effortless way to share professional information and the ability to update details without reprinting physical cards.</p></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-8055-8181-d3ab1ef7d34b" class=""><strong>Problems</strong><br/>Traditional business cards become outdated quickly, are easily misplaced, and offer no way to track or control how information is shared. Users lack flexibility and visibility after exchanging contact details.</p></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-8036-a732-cef679bde4a8" class=""><strong>Jobs to Be Done</strong><br/>Users want to share their professional identity instantly, ensure shared information is always current, and leave a lasting digital impression during networking interactions.</p></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81be-b0b7-fea116cff5d9" class=""><strong>Evidence and Research</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80d3-84d6-e59742a43bf6" class="">These problems are validated through feedback from professionals and sales teams, observations from networking and business events, industry trends toward contactless and digital solutions, internal product discovery discussions, and increasing adoption of NFC-based smart card technologies.</p></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-8128-ad50-e06829a39bb9" class="block-color-yellow_background">Solution:</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8199-91c6-fa9dba5f6c16" class="numbered-list" start="1"><li><strong>Brief of the solution.</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-802e-89f8-dcb76baae850" class="bulleted-list"><li style="list-style-type:disc">Wavpe provides a hybrid solution that combines a physical NFC-enabled business card with a digital profile management platform. Each NFC card is uniquely linked to a user account, allowing instant access to the user’s digital profile through a simple tap or QR code scan.</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-8053-8aa5-d9b80569cc1b" class="bulleted-list"><li style="list-style-type:disc">Users can create and manage their professional information through the Wavpe app, including contact details, company information, and social links. Any updates made to the profile are reflected immediately, eliminating the need to reprint physical cards. The solution ensures a seamless, contactless, and modern networking experience across devices.</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8157-9238-d7b7b584ac50" class="numbered-list" start="2"><li><strong>Other alternatives are considered with prioritization metrics.</strong></li></ol></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-805d-a95b-cc79463305e3" class="">Multiple alternatives were evaluated before finalizing the Wavpe solution:<br/><strong>Alternative 1: QR-Code–Only Digital Business Card<br/></strong>This approach allows users to share profiles using QR codes without physical cards. While cost-effective, it relies on manual scanning and does not provide the same seamless or premium experience as NFC-based sharing.<br/><strong>Alternative 2: Mobile App–Only Contact Sharing<br/></strong>This solution depends entirely on app installation and user interaction on both sides. Adoption friction is higher, and sharing is less intuitive during quick networking interactions.<br/><strong>Alternative 3: Static NFC Card Without Editable Profile<br/></strong>This option allows NFC-based sharing but does not support real-time profile updates. Any change in details would still require card replacement, defeating a key user need.<br/><br/><strong>Prioritization Rationale</strong><br/>The final solution NFC card combined with a dynamic digital profile was prioritized based on the following criteria:</p></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-805b-8ea8-ebbeba43e1f2" class="bulleted-list"><li style="list-style-type:disc">User experience simplicity and speed</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-80f8-847c-d0838252f3f4" class="bulleted-list"><li style="list-style-type:disc">Flexibility to update information in real time</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-800e-9707-f50fe6efa388" class="bulleted-list"><li style="list-style-type:disc">Reduced friction during networking interactions</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-80ca-aa33-c80ea7aba0a2" class="bulleted-list"><li style="list-style-type:disc">Long-term scalability for enterprise and premium use cases</li></ul></div><div style="display:contents" dir="auto"><ul id="2cad72c8-8986-803f-8656-d1b367a20877" class="bulleted-list"><li style="list-style-type:disc">Strong differentiation from traditional and QR-only solutions<br/>This approach best balances usability, scalability, and long-term business value.</li></ul></div><div style="display:contents" dir="auto"><h2 id="2cad72c8-8986-817a-9ef7-e0b18b74f165" class="block-color-yellow_background">Product flow (Details of the feature/product):</h2></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-8122-a1b5-ff325f8b6035" class=""><strong>Customer Journey</strong></h3></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-80b4-b556-e95eb41bbd8a" class="">The customer journey for Wavpe begins when a user receives an NFC business card and installs or accesses the Wavpe app.</p></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-805b-ab7a-f99ec2391f8e" class="numbered-list" start="1"><li>The user signs up or logs into the Wavpe app.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8025-aec1-c45d06c05fb3" class="numbered-list" start="2"><li>The user activates the NFC business card by linking it to their profile.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-801d-bb53-c8f4b1ee8c0a" class="numbered-list" start="3"><li>The user creates or updates their digital business profile with professional details.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8046-ae47-e30c6f6fbb0f" class="numbered-list" start="4"><li>During networking, the user shares their profile via NFC tap or QR code.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8063-8c0c-c246a3cefd70" class="numbered-list" start="5"><li>The recipient views the digital profile and saves contact details.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-80db-8ccd-f993cdb1b826" class="numbered-list" start="6"><li>The user can update their profile anytime, and changes reflect instantly without reactivating the card.<br/>This journey ensures minimal friction, instant sharing, and long-term usability.</li></ol></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-8127-b0c7-e41201144304" class=""><strong>Wireframes and Flow diagrams</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-8159-aabd-e7bdff3e5c97" class=""><strong>User Stories + User acceptance criteria</strong></h3></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-80a5-b6d7-d6c513226c5c" class="">User stories define the functional requirements from the user’s perspective.</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8079-b872-c89f47b2c75a" class=""><mark class="highlight-yellow"><strong>User Story 1: Digital Identity Exchange via NFC (Core Value Proposition)</strong></mark></p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80cd-9781-cd338157c922" class=""><strong>As a</strong> business professional (individual user),</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80a4-8fd1-c6bbbb0f1232" class=""><strong>I want</strong> to instantly share my verified digital business profile using an NFC-enabled Wavpe card or QR,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80f0-a20a-e47abb2ae84b" class=""><strong>So that</strong> I can establish professional connections seamlessly without manual data entry or physical card exchange.</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80f5-a7bc-d57db40a1888" class=""><em><strong>Business Value</strong></em></p></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-801c-b625-f676e9aa1745" class="bulleted-list"><li style="list-style-type:disc">Eliminates friction in networking</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8013-a0cb-f32f0f05045e" class="bulleted-list"><li style="list-style-type:disc">Improves first-touch conversion in professional interactions</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80de-9d38-ed819d910f6a" class="bulleted-list"><li style="list-style-type:disc">Positions Wavpe as a modern, sustainable alternative to paper cards</li></ul></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-804b-8ee4-e4452bd9439a" class=""><em><strong>Acceptance Criteria</strong></em></p></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80ef-8ee5-e9c528d53efb" class="bulleted-list"><li style="list-style-type:disc">User can tap NFC card or scan QR to open their Wavpe profile</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-807b-b157-fd3a01599997" class="bulleted-list"><li style="list-style-type:disc">Profile opens without requiring the recipient to install the app</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8035-91b9-defa1b8df559" class="bulleted-list"><li style="list-style-type:disc">Contact details can be saved in one tap (iOS &amp; Android)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-800a-96a0-d7b6ba355d49" class="bulleted-list"><li style="list-style-type:disc">Profile reflects real-time updates made by the user</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8049-a468-cef960312d8d" class="bulleted-list"><li style="list-style-type:disc">Works offline via cached profile fallback</li></ul></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80ed-9281-dbbea6043a36" class=""><mark class="highlight-yellow"><strong>User Story 2: Team-Wide Brand Consistency &amp; Centralized Control</strong></mark></p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80b0-af53-fd1452fc9965" class=""><strong>As a</strong> team manager or department lead,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8050-83ee-cfaf9ff63d21" class=""><strong>I want</strong> to centrally manage and standardize team members’ Wavpe profiles,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8053-a3bf-e082241531c9" class=""><strong>So that</strong> brand identity, messaging, and compliance are consistent across all external interactions.</p></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-804b-bfd8-d130db7da1da" class=""><strong>Business Value</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-805d-a11e-f73b49355f7d" class="bulleted-list"><li style="list-style-type:disc">Strengthens brand governance</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-806d-9d94-c59e32d5c88a" class="bulleted-list"><li style="list-style-type:disc">Reduces risk of outdated or incorrect employee information</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8020-a558-e48f5e972c18" class="bulleted-list"><li style="list-style-type:disc">Supports scalable onboarding for growing teams</li></ul></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-806f-8620-f267805658b0" class=""><strong>Acceptance Criteria</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8051-b9bd-cc7f06402951" class="bulleted-list"><li style="list-style-type:disc">Admin can create and apply brand templates (logo, colors, disclaimers)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8004-9108-d24990ae664e" class="bulleted-list"><li style="list-style-type:disc">Role-based access controls are available (Admin, Manager, User)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-809a-b682-f6cb935cd0e3" class="bulleted-list"><li style="list-style-type:disc">Bulk profile creation and updates supported</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80ad-a6aa-f1a16b648ffb" class="bulleted-list"><li style="list-style-type:disc">Changes reflect instantly across all assigned NFC cards</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-801e-82bc-cf126bad12ad" class="bulleted-list"><li style="list-style-type:disc">Audit trail available for profile modifications</li></ul></div><div style="display:contents" dir="auto"><hr id="2ced72c8-8986-8047-b8d3-ed8b59e682f1"/></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80f1-b8a1-e875f13f220e" class=""><mark class="highlight-yellow"><strong>User Story 3: Enterprise Lead Capture &amp; CRM Integration (B2B Enablement)</strong></mark></p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8063-a6e2-cbc8162bab82" class=""><strong>As an</strong> enterprise sales or business development leader,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8016-8215-ce8b3d969d1d" class=""><strong>I want</strong> Wavpe interactions to automatically capture leads and sync with CRM systems,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8017-ae62-ed0aa52e4713" class=""><strong>So that</strong> networking activities translate into measurable pipeline outcomes.</p></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-8086-82ad-cfd71f13c7b8" class=""><strong>Business Value</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-800e-a016-d2dda64d0bb9" class="bulleted-list"><li style="list-style-type:disc">Converts networking into actionable sales intelligence</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80f9-affa-c5078acdf502" class="bulleted-list"><li style="list-style-type:disc">Improves ROI tracking for events and field sales</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8008-b2a8-c66df43a56e9" class="bulleted-list"><li style="list-style-type:disc">Aligns marketing, sales, and operations data</li></ul></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-8094-b685-db2a95d6d4e4" class=""><strong>Acceptance Criteria</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8061-8786-ef8795e354d8" class="bulleted-list"><li style="list-style-type:disc">Every NFC/QR interaction logs a lead with timestamp and location (where permitted)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8039-9b9b-ef9d898c7c95" class="bulleted-list"><li style="list-style-type:disc">Lead data integrates with CRM platforms (e.g., Salesforce, HubSpot)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8071-a904-dd63131bd9ae" class="bulleted-list"><li style="list-style-type:disc">Users can tag interactions (event, meeting, follow-up required)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8063-937c-ca11405ee595" class="bulleted-list"><li style="list-style-type:disc">Consent management complies with GDPR and enterprise data policies</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80cf-9766-c04579349194" class="bulleted-list"><li style="list-style-type:disc">Admin dashboards show conversion metrics and engagement trends</li></ul></div><div style="display:contents" dir="auto"><hr id="2ced72c8-8986-80b3-b121-efc55ad2b71f"/></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8066-bd79-d7c81a03914d" class=""><mark class="highlight-yellow"><strong>User Story 4: Advanced Analytics &amp; Engagement Insights</strong></mark></p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-806a-bf6e-e68b13b470f4" class=""><strong>As a</strong> product owner or enterprise decision-maker,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8055-af0d-cd20ca1599ac" class=""><strong>I want</strong> access to detailed analytics on how and when Wavpe cards are used,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-8099-bb6a-fbbb1091043a" class=""><strong>So that</strong> I can evaluate adoption, engagement, and business impact.</p></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-80cb-a5b5-cdba6bf1a186" class=""><strong>Business Value</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-807f-a2b7-c15a2d15ac72" class="bulleted-list"><li style="list-style-type:disc">Enables data-driven decision-making</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8053-8f28-e4ef10ebb862" class="bulleted-list"><li style="list-style-type:disc">Demonstrates value to stakeholders and leadership</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-805d-92ae-cdfd02d9ce5f" class="bulleted-list"><li style="list-style-type:disc">Identifies high-performing teams and use cases</li></ul></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-80e9-adb0-d0eab2c937b0" class=""><strong>Acceptance Criteria</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-800b-b42d-c35cfd7436f1" class="bulleted-list"><li style="list-style-type:disc">Dashboard displays taps, scans, saves, and follow-ups</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8094-934b-ee92f3a79295" class="bulleted-list"><li style="list-style-type:disc">Analytics segmented by individual, team, region, and time period</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8059-9710-fba7b7b75716" class="bulleted-list"><li style="list-style-type:disc">Exportable reports for PMO and leadership reviews</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80a2-b80f-e19d9e45d1f7" class="bulleted-list"><li style="list-style-type:disc">Trend insights and usage benchmarks provided</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-806d-af1a-fee5a3b67fca" class="bulleted-list"><li style="list-style-type:disc">Data refreshes in near real-time</li></ul></div><div style="display:contents" dir="auto"><hr id="2ced72c8-8986-80f1-9f95-f69be7e0e819"/></div><div style="display:contents" dir="auto"><h2 id="2ced72c8-8986-8014-94ae-ebf6c8f8aaa3" class=""><strong>User Story 5: Secure, Scalable, and Enterprise-Ready Platform</strong></h2></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80d0-b231-e246eeaad111" class=""><strong>As an</strong> enterprise IT or compliance stakeholder,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80ae-b9c1-fef59289d3a1" class=""><strong>I want</strong> Wavpe to meet enterprise-grade security, scalability, and compliance standards,</p></div><div style="display:contents" dir="auto"><p id="2ced72c8-8986-80eb-90e0-c977d69fe174" class=""><strong>So that</strong> it can be safely deployed across large organizations.</p></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-80a5-a3f4-d5d3644d28f2" class=""><strong>Business Value</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80e1-b673-ed4122dd6696" class="bulleted-list"><li style="list-style-type:disc">Accelerates enterprise adoption</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80bc-aff8-d74229fd21d1" class="bulleted-list"><li style="list-style-type:disc">Reduces procurement and security review friction</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-805a-8c8b-c78f47c360f2" class="bulleted-list"><li style="list-style-type:disc">Builds long-term platform trust</li></ul></div><div style="display:contents" dir="auto"><h3 id="2ced72c8-8986-80dc-a129-ef6dc00b908d" class=""><strong>Acceptance Criteria</strong></h3></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8053-a902-fe24e4b57cb6" class="bulleted-list"><li style="list-style-type:disc">SSO support (SAML / OAuth)</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80ef-b8d8-d077fc8daa73" class="bulleted-list"><li style="list-style-type:disc">Data encryption at rest and in transit</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-8065-af30-e0b322848ec9" class="bulleted-list"><li style="list-style-type:disc">Compliance with GDPR, SOC 2, and regional data regulations</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-80eb-b4fa-e1e3e282395d" class="bulleted-list"><li style="list-style-type:disc">Ability to deactivate or reassign NFC cards instantly</li></ul></div><div style="display:contents" dir="auto"><ul id="2ced72c8-8986-803f-ad64-def424421f35" class="bulleted-list"><li style="list-style-type:disc">Platform supports thousands of concurrent users without degradation</li></ul></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-8088-a9d3-f596b21c4195" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81c3-92d2-faded74a67d8" class="numbered-list" start="1"><li><strong>Edge cases</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80e7-bf68-ec4c18c84377" class="bulleted-list"><li style="list-style-type:disc">NFC card is already linked to another account</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8031-99f3-d44931e2ca34" class="bulleted-list"><li style="list-style-type:disc">User attempts activation with an invalid or damaged NFC card</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80f5-84bb-c6fa699d0a75" class="bulleted-list"><li style="list-style-type:disc">Recipient device does not support NFC</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8091-8d5b-c82b80b18f5b" class="bulleted-list"><li style="list-style-type:disc">Poor internet connectivity during profile access</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80fb-942d-c64ba99462d5" class="bulleted-list"><li style="list-style-type:disc">User updates profile while recipient is accessing the profile</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80a9-ace3-edc127005077" class="bulleted-list"><li style="list-style-type:disc">NFC tap fails and fallback to QR code is required</li></ul></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-80a4-ac78-df598dff6981" class="">These scenarios must be handled gracefully to ensure reliability.</p></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81da-acb4-f4ba0a439ddf" class="numbered-list" start="1"><li><strong>Event tracking sheet</strong><strong><a href="https://www.linkedin.com/feed/update/urn:li:activity:7091648814385627137">.</a></strong></li></ol></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-803d-80da-e49599c1dbd3" class="">This event tracking plan defines the key user and recipient actions to be captured across the Wavpe NFC Business Card and App. The events and properties listed here are designed to support product analytics, performance monitoring, and data-driven decision-making.</p></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-80b8-9cae-ea22645342f2" class="">The tracking plan is tool-agnostic and can be implemented using any analytics platform as required.</p></div><div style="display:contents" dir="ltr"><div id="2cbd72c8-8986-80b3-8c69-ddd7a87fe1c1" class="collection-content"><h4 class="collection-title">Event Tracking Plan – Wavpe</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>Event Name</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Event Category</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>Event Description</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>Trigger</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>KPI</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Property Type</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>Property Name</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>Property Definition</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Data Type</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Platform</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Required</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Owner</th></tr></thead><tbody><tr id="2cbd72c8-8986-80ce-a4c0-fe4d37059466"><td class="cell-title"><a href="Login%20Success%202cbd72c8898680cea4c0fe4d37059466.html">Login Success</a></td><td class="cell-k{|y"><span class="selected-value select-value-color-green">Authentication</span></td><td class="cell-^Yg@">User successfully logs into the Wavpe app.</td><td class="cell-tHmA">User clicks the Login button and authentication is successful.<br/></td><td class="cell-dpq[">DAU / WAU, Login Success Rate<br/></td><td class="cell-;EvI"><span class="selected-value select-value-color-default">User Property</span></td><td class="cell-Xn&gt;r">user_id<br/></td><td class="cell-fS&lt;}">Unique identifier assigned to each registered user.</td><td class="cell-yJ?D"><span class="selected-value select-value-color-blue">String</span></td><td class="cell-^LI&gt;"><span class="selected-value select-value-color-purple">Android</span><span class="selected-value select-value-color-orange">iOS</span></td><td class="cell-bj:P"><div class="checkbox checkbox-on"></div></td><td class="cell-WYXD"><span class="selected-value select-value-color-blue">Product</span></td></tr><tr id="2cbd72c8-8986-8036-a8ad-f1f485c210bf"><td class="cell-title"><a href="NFC%20Card%20Activated%202cbd72c889868036a8adf1f485c210bf.html">NFC Card Activated
+</a></td><td class="cell-k{|y"><span class="selected-value select-value-color-default">NFC Activation</span></td><td class="cell-^Yg@">User successfully activates and links an NFC business card to their profile.</td><td class="cell-tHmA">Successful NFC read and card linkage confirmation.</td><td class="cell-dpq[">NFC Activation Success Rate</td><td class="cell-;EvI"><span class="selected-value select-value-color-orange">Event Property</span></td><td class="cell-Xn&gt;r">card_id<br/></td><td class="cell-fS&lt;}">Unique identifier of the NFC business card.<br/></td><td class="cell-yJ?D"><span class="selected-value select-value-color-blue">String</span></td><td class="cell-^LI&gt;"><span class="selected-value select-value-color-purple">Android</span></td><td class="cell-bj:P"><div class="checkbox checkbox-on"></div></td><td class="cell-WYXD"><span class="selected-value select-value-color-blue">Product</span></td></tr><tr id="2cbd72c8-8986-80b1-8706-cbb54008aefa"><td class="cell-title"><a href="Profile%20Updated%202cbd72c8898680b18706cbb54008aefa.html">Profile Updated</a></td><td class="cell-k{|y"><span class="selected-value select-value-color-blue">Profile Management</span></td><td class="cell-^Yg@">User updates one or more fields in their digital business profile.<br/></td><td class="cell-tHmA">User clicks Save after editing profile details.<br/></td><td class="cell-dpq[">Profile Completion Rate<br/></td><td class="cell-;EvI"><span class="selected-value select-value-color-blue">updated_fields</span></td><td class="cell-Xn&gt;r">updated_fields<br/></td><td class="cell-fS&lt;}">List of profile fields modified during the update.<br/></td><td class="cell-yJ?D"><span class="selected-value select-value-color-default">Array</span></td><td class="cell-^LI&gt;"><span class="selected-value select-value-color-purple">Android</span><span class="selected-value select-value-color-blue">Web</span><span class="selected-value select-value-color-orange">iOS</span></td><td class="cell-bj:P"><div class="checkbox checkbox-on"></div></td><td class="cell-WYXD"><span class="selected-value select-value-color-blue">Product</span></td></tr><tr id="2cbd72c8-8986-808f-9f42-ce6d10399027"><td class="cell-title"><a href="Profile%20Viewed%202cbd72c88986808f9f42ce6d10399027.html">Profile Viewed
+</a></td><td class="cell-k{|y"><span class="selected-value select-value-color-brown">Sharing</span></td><td class="cell-^Yg@">Recipient views a user’s digital profile via NFC tap or QR scan.<br/></td><td class="cell-tHmA">NFC tap or QR code scan opens the public profile.<br/></td><td class="cell-dpq[">Profile Views, Engagement Rate<br/></td><td class="cell-;EvI"><span class="selected-value select-value-color-orange">Event Property</span></td><td class="cell-Xn&gt;r">profile_id<br/></td><td class="cell-fS&lt;}">Unique identifier of the digital profile viewed.<br/></td><td class="cell-yJ?D"><span class="selected-value select-value-color-blue">String</span></td><td class="cell-^LI&gt;"><span class="selected-value select-value-color-purple">Android</span><span class="selected-value select-value-color-blue">Web</span><span class="selected-value select-value-color-orange">iOS</span></td><td class="cell-bj:P"><div class="checkbox checkbox-on"></div></td><td class="cell-WYXD"><span class="selected-value select-value-color-pink">Marketing</span></td></tr></tbody></table><br/><br/></div></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-818b-9be3-c058f1c61419" class="block-color-yellow_background">Tentative Timelines:</h3></div><div style="display:contents" dir="ltr"><table id="2cad72c8-8986-81fb-9147-fe60aff5bc48" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81b4-b8d8-c4c9d9803b6e"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Task</th><td id="WZY?" class="" style="width:441px">Date</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-819c-9e8d-f5978011955a"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Leadership approval</th><td id="WZY?" class="" style="width:441px">22/06/2022</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81be-a866-de0bc56b134f"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Design ready</th><td id="WZY?" class="" style="width:441px">06/07/2022</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-81bf-8ad4-f03677fbf08f"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Prototype testing</th><td id="WZY?" class="" style="width:441px">13/07/2022</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-8181-8b20-f35160b1871e"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Development starts</th><td id="WZY?" class="" style="width:441px">16/07/2022</td></tr></div><div style="display:contents" dir="ltr"><tr id="2cad72c8-8986-815c-b8cc-f02c8c918a7e"><th id="vYp_" class="simple-table-header-color simple-table-header" style="width:238px">Beta Launch</th><td id="WZY?" class="" style="width:441px">15/08/2022</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81ab-afdd-fbe2092bd205" class="block-color-yellow_background">Dependencies:</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8178-bcd2-f778f3c04915" class="numbered-list" start="1"><li><strong>Open Questions</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-808b-b82f-f5dcbbb3c68b" class="bulleted-list"><li style="list-style-type:disc">What NFC standards and phone models will be officially supported at launch?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80b4-aab1-d36f0800ed5b" class="bulleted-list"><li style="list-style-type:disc">Should profile access be allowed without login for recipients, or gated with basic consent?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8027-b638-c92ed233c023" class="bulleted-list"><li style="list-style-type:disc">What level of customization (branding, fields) will be offered to enterprise users in the first phase?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-804b-b917-f585baa8b216" class="bulleted-list"><li style="list-style-type:disc">How will lost or damaged NFC cards be handled from a user and system perspective?</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81ef-80b1-c2eb7e4efecc" class="numbered-list" start="2"><li><strong>Infrastructure requirements</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80ca-8ceb-f1f3d7502da2" class="bulleted-list"><li style="list-style-type:disc">What NFC standards and phone models will be officially supported at launch?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8053-a6b3-cdf45b265b25" class="bulleted-list"><li style="list-style-type:disc">Should profile access be allowed without login for recipients, or gated with basic consent?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-809e-b2d1-d2200f680e03" class="bulleted-list"><li style="list-style-type:disc">What level of customization (branding, fields) will be offered to enterprise users in the first phase?</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80cb-9f65-cc5395086ae3" class="bulleted-list"><li style="list-style-type:disc">How will lost or damaged NFC cards be handled from a user and system perspective?</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81b7-a5c6-c7415f7c6082" class="numbered-list" start="3"><li><strong>Budget approvals</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-800b-a8d7-cc47cbc5cf87" class="bulleted-list"><li style="list-style-type:disc">NFC card procurement and manufacturing</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8033-9bb9-d731face79b0" class="bulleted-list"><li style="list-style-type:disc">App development and maintenance costs</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8029-8629-d9b1b2dede19" class="bulleted-list"><li style="list-style-type:disc">Cloud infrastructure and hosting services</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80b8-9fad-ed12596556ee" class="bulleted-list"><li style="list-style-type:disc">Initial beta launch and limited marketing efforts</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8108-99f4-e36aadbade6e" class="numbered-list" start="4"><li><strong>Partner Support (APIs, Partnerships)</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8025-a930-d41ed9a70828" class="bulleted-list"><li style="list-style-type:disc">NFC card vendors for card quality and compatibility</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8023-b7e5-eb5da5fe7266" class="bulleted-list"><li style="list-style-type:disc">QR code generation and redirection services (if applicable)</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80bf-bdae-cc8c48a839c1" class="bulleted-list"><li style="list-style-type:disc">Third-party services for email, notifications, or authentication (if used)</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81d2-a7b5-dd97efce3ca4" class="numbered-list" start="5"><li><strong>Internal Dependencies (Tech, Design, Other Teams)</strong></li></ol></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80db-a7e6-e6bff06feb1d" class="bulleted-list"><li style="list-style-type:disc">Design team for wireframes, user flows, and usability validation</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8084-af29-d122c52b4a4a" class="bulleted-list"><li style="list-style-type:disc">Engineering team for backend, mobile app, and NFC integration</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80b8-9a20-f1dfd6216b05" class="bulleted-list"><li style="list-style-type:disc">QA team for testing NFC behavior across devices</li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-802c-8eb8-e5b59b0b209d" class="bulleted-list"><li style="list-style-type:disc">Marketing team for beta launch planning and messaging</li></ul></div><div style="display:contents" dir="auto"><h3 id="2cad72c8-8986-81ac-93eb-c600c450911e" class="block-color-yellow_background">Related documents:</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81a2-b768-c01cd9a37906" class="numbered-list" start="1"><li>Tech planning document</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-81ca-987b-c4907fb5b2c1" class="numbered-list" start="2"><li>Design planning document</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2cad72c8-8986-8191-b5f7-c1609da01fcd" class="numbered-list" start="3"><li>Go to market planning</li></ol></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-800f-881a-f0e2c32dec16" class="block-color-blue_background"><strong>Review &amp; Iteration Plan</strong></p></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8011-b3d8-c9d4435d5b91" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-blue">This PRD will be shared asynchronously with stakeholders for feedback</mark></em></li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-8029-b55b-e9e808bc78eb" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-blue">Feedback will be consolidated before final scope lock</mark></em></li></ul></div><div style="display:contents" dir="auto"><ul id="2cbd72c8-8986-80a9-b92c-efaa52f4013c" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-blue">Iterations will be made based on feasibility, impact, and alignment</mark></em></li></ul></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-8123-8160-fa6d93027bdb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2cad72c8-8986-8136-b151-f7e4cd989688" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2cbd72c8-8986-8091-80a7-e91225f34536" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
